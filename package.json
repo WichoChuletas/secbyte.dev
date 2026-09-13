@@ -17,6 +17,10 @@
     "reading-time": "^1.5.0"
   },
   "allowScripts": {
-    "esbuild": true
+    "esbuild": true,
+    "workerd@1.20260911.1": true
+  },
+  "devDependencies": {
+    "wrangler": "^4.131.1"
   }
 }

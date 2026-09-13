@@ -1,5 +1,6 @@
 # build output
 dist/
+.wrangler/
 # seeded design-canvas payload (design source lives in logo-design/*.dc.html)
 logo-design/*.html
 # generated types
@@ -18,6 +19,7 @@ pnpm-debug.log*
 # environment variables
 .env
 .env.production
+.dev.vars
 
 # macOS-specific files
 .DS_Store
