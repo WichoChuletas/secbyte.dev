@@ -5,6 +5,7 @@ dist/
 logo-design/*.html
 # generated types
 .astro/
+src/generated/
 
 # dependencies
 node_modules/
