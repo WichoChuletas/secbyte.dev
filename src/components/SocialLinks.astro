@@ -1,0 +1,21 @@
+---
+const { links = [] } = Astro.props;
+---
+
+{links.length > 0 && (
+	<ul class="social-links">
+		{links.map((link) => (
+			<li><a href={link.url} target="_blank" rel="noopener noreferrer">{link.label}</a></li>
+		))}
+	</ul>
+)}
+
+<style>
+	.social-links {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 1.25rem;
+		font-size: 0.85rem;
+		color: var(--color-text-muted);
+	}
+</style>

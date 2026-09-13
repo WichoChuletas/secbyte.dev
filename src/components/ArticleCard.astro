@@ -1,0 +1,45 @@
+---
+import { getReadingTime } from '../utils/readingTime.js';
+
+const { article } = Astro.props;
+const { title, description, pubDate } = article.data;
+const readTime = getReadingTime(article.body ?? '');
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+	month: 'long',
+	day: 'numeric',
+	year: 'numeric',
+});
+---
+
+<article class="article-card">
+	<a class="title" href={`/articles/${article.id}`}>{title}</a>
+	<p class="description">{description}</p>
+	<p class="meta">{formattedDate} • {readTime}</p>
+</article>
+
+<style>
+	.article-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.title {
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
+
+	.title:hover {
+		text-decoration: underline;
+	}
+
+	.description {
+		color: var(--color-text-muted);
+		font-size: 0.9rem;
+	}
+
+	.meta {
+		color: var(--color-text-faint);
+		font-size: 0.8rem;
+	}
+</style>

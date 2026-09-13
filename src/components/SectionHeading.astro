@@ -1,0 +1,20 @@
+---
+const { icon, label } = Astro.props;
+---
+
+<h2 class="section-heading"><span class="icon">{icon}</span>{label}</h2>
+
+<style>
+	.section-heading {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		font-size: 0.95rem;
+		font-weight: 600;
+		color: var(--color-text);
+	}
+
+	.icon {
+		font-size: 0.95rem;
+	}
+</style>

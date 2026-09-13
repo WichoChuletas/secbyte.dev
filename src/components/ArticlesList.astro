@@ -1,0 +1,32 @@
+---
+import ArticleCard from './ArticleCard.astro';
+
+const { articles, showViewMore = false } = Astro.props;
+---
+
+<div class="articles-list">
+	{articles.map((article) => <ArticleCard article={article} />)}
+</div>
+
+{showViewMore && (
+	<a class="view-more" href="/articles">View more →</a>
+)}
+
+<style>
+	.articles-list {
+		display: flex;
+		flex-direction: column;
+		gap: 1.75rem;
+	}
+
+	.view-more {
+		display: inline-block;
+		margin-top: 1.5rem;
+		font-size: 0.85rem;
+		color: var(--color-text-muted);
+	}
+
+	.view-more:hover {
+		color: var(--color-text);
+	}
+</style>

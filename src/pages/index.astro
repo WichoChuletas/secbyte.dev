@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ArticlesList from '../components/ArticlesList.astro';
+import ProjectsGrid from '../components/ProjectsGrid.astro';
+import Footer from '../components/Footer.astro';
+import { projects } from '../data/projects.js';
+
+const allArticles = await getCollection('articles', ({ data }) => !data.draft);
+const latestArticles = allArticles
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 4);
+---
+
+<Layout>
+	<main class="wrapper">
+		<Hero />
+
+		<section class="section">
+			<SectionHeading icon="✏️" label="Articles" />
+			<ArticlesList articles={latestArticles} showViewMore={allArticles.length > latestArticles.length} />
+		</section>
+
+		<section id="projects" class="section">
+			<SectionHeading icon="🔗" label="Projects" />
+			<ProjectsGrid projects={projects} />
+		</section>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+	main {
+		padding-top: var(--space-6);
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-5);
+	}
+
+	.section {
+		display: flex;
+		flex-direction: column;
+		gap: var(--space-3);
+	}
+</style>

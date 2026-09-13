@@ -1,0 +1,150 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import Footer from '../../components/Footer.astro';
+import { getReadingTime } from '../../utils/readingTime.js';
+
+export async function getStaticPaths() {
+	const articles = await getCollection('articles', ({ data }) => !data.draft);
+	return articles.map((article) => ({
+		params: { slug: article.id },
+		props: { article },
+	}));
+}
+
+const { article } = Astro.props;
+const { title, description, pubDate } = article.data;
+const { Content } = await render(article);
+const readTime = getReadingTime(article.body ?? '');
+const formattedDate = pubDate.toLocaleDateString('en-US', {
+	month: 'long',
+	day: 'numeric',
+	year: 'numeric',
+});
+---
+
+<Layout title={`${title} — secbyte.dev`} description={description}>
+	<main class="wrapper">
+		<a class="back-link" href="/articles">← Articles</a>
+
+		<article>
+			<header>
+				<h1>{title}</h1>
+				<p class="meta">{formattedDate} • {readTime}</p>
+			</header>
+
+			<div class="prose">
+				<Content />
+			</div>
+		</article>
+	</main>
+
+	<Footer />
+</Layout>
+
+<style>
+	main {
+		padding-top: var(--space-5);
+	}
+
+	.back-link {
+		font-size: 0.85rem;
+		color: var(--color-text-muted);
+	}
+
+	.back-link:hover {
+		color: var(--color-text);
+	}
+
+	header {
+		margin-top: var(--space-3);
+		margin-bottom: var(--space-4);
+		display: flex;
+		flex-direction: column;
+		gap: 0.5rem;
+	}
+
+	h1 {
+		font-size: 1.2rem;
+		font-weight: 600;
+	}
+
+	.meta {
+		color: var(--color-text-faint);
+		font-size: 0.8rem;
+	}
+
+	.prose {
+		font-size: 0.92rem;
+		line-height: 1.75;
+		color: var(--color-text);
+	}
+
+	.prose :global(h2) {
+		font-size: 1rem;
+		font-weight: 600;
+		margin-top: var(--space-4);
+		margin-bottom: var(--space-2);
+	}
+
+	.prose :global(p) {
+		margin-bottom: var(--space-2);
+		color: var(--color-text-muted);
+	}
+
+	.prose :global(ul),
+	.prose :global(ol) {
+		margin-bottom: var(--space-2);
+		padding-left: 1.25rem;
+		list-style: disc;
+	}
+
+	.prose :global(li) {
+		color: var(--color-text-muted);
+		margin-bottom: 0.4rem;
+	}
+
+	.prose :global(pre) {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 6px;
+		padding: var(--space-2);
+		overflow-x: auto;
+		margin-bottom: var(--space-2);
+		font-size: 0.85rem;
+	}
+
+	.prose :global(code) {
+		font-family: var(--font-mono);
+	}
+
+	.prose :global(p code) {
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		border-radius: 4px;
+		padding: 0.1rem 0.35rem;
+		font-size: 0.85rem;
+	}
+
+	.prose :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+		margin-bottom: var(--space-2);
+		font-size: 0.85rem;
+	}
+
+	.prose :global(th),
+	.prose :global(td) {
+		border: 1px solid var(--color-border);
+		padding: 0.5rem 0.75rem;
+		text-align: left;
+	}
+
+	.prose :global(th) {
+		color: var(--color-text);
+	}
+
+	.prose :global(td) {
+		color: var(--color-text-muted);
+	}
+</style>

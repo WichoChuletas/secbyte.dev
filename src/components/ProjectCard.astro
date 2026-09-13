@@ -1,0 +1,33 @@
+---
+const { project } = Astro.props;
+const { name, description, url } = project;
+---
+
+<div class="project-card">
+	{url
+		? <a class="name" href={url} target="_blank" rel="noopener noreferrer">{name}</a>
+		: <p class="name">{name}</p>}
+	<p class="description">{description}</p>
+</div>
+
+<style>
+	.project-card {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+
+	.name {
+		font-weight: 600;
+		font-size: 0.95rem;
+	}
+
+	a.name:hover {
+		text-decoration: underline;
+	}
+
+	.description {
+		color: var(--color-text-muted);
+		font-size: 0.9rem;
+	}
+</style>
