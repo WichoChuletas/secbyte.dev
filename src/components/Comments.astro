@@ -1,6 +1,9 @@
 ---
 const { slug } = Astro.props;
-const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '1x00000000000000000000AA';
+// Turnstile site keys are meant to be public (they're embedded in the page HTML), so
+// committing the real one is fine. Falls back to Cloudflare's "always passes" test key
+// for local dev when PUBLIC_TURNSTILE_SITE_KEY isn't set.
+const siteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || '0x4AAAAAAEyJrvUvwvfHjK2e';
 ---
 
 <section class="comments" data-comments={slug}>
