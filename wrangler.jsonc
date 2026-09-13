@@ -5,8 +5,5 @@
 	"assets": {
 		"directory": "./dist",
 		"binding": "ASSETS"
-	},
-	"kv_namespaces": [
-		{ "binding": "COMMENTS", "id": "1950a287af964076a51915c342d76708" }
-	]
+	}
 }

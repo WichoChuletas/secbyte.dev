@@ -2,7 +2,6 @@
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import Footer from '../../components/Footer.astro';
-import Comments from '../../components/Comments.astro';
 import { getReadingTime } from '../../utils/readingTime.js';
 
 export async function getStaticPaths() {
@@ -38,8 +37,6 @@ const formattedDate = pubDate.toLocaleDateString('en-US', {
 				<Content />
 			</div>
 		</article>
-
-		<Comments slug={article.id} />
 	</main>
 
 	<Footer />
