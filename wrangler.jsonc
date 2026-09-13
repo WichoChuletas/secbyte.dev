@@ -1,0 +1,12 @@
+{
+	"name": "secbyte-dev",
+	"compatibility_date": "2026-09-01",
+	"main": "src/worker.js",
+	"assets": {
+		"directory": "./dist",
+		"binding": "ASSETS"
+	},
+	"kv_namespaces": [
+		{ "binding": "COMMENTS", "id": "1950a287af964076a51915c342d76708" }
+	]
+}

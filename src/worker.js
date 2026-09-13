@@ -9,16 +9,13 @@ function jsonResponse(data, status = 200) {
 	});
 }
 
-export async function onRequestGet(context) {
-	const { params, env } = context;
-	const raw = await env.COMMENTS.get(`comments:${params.slug}`);
+async function handleGetComments(slug, env) {
+	const raw = await env.COMMENTS.get(`comments:${slug}`);
 	const comments = raw ? JSON.parse(raw) : [];
 	return jsonResponse({ comments });
 }
 
-export async function onRequestPost(context) {
-	const { request, params, env } = context;
-
+async function handlePostComment(request, slug, env) {
 	let body;
 	try {
 		body = await request.json();
@@ -65,7 +62,7 @@ export async function onRequestPost(context) {
 		return jsonResponse({ error: 'Please wait a moment before posting again.' }, 429);
 	}
 
-	const commentsKey = `comments:${params.slug}`;
+	const commentsKey = `comments:${slug}`;
 	const raw = await env.COMMENTS.get(commentsKey);
 	const comments = raw ? JSON.parse(raw) : [];
 
@@ -82,3 +79,19 @@ export async function onRequestPost(context) {
 
 	return jsonResponse({ comment }, 201);
 }
+
+export default {
+	async fetch(request, env) {
+		const url = new URL(request.url);
+		const match = url.pathname.match(/^\/api\/comments\/([^/]+)\/?$/);
+
+		if (match) {
+			const slug = decodeURIComponent(match[1]);
+			if (request.method === 'GET') return handleGetComments(slug, env);
+			if (request.method === 'POST') return handlePostComment(request, slug, env);
+			return jsonResponse({ error: 'Method not allowed.' }, 405);
+		}
+
+		return env.ASSETS.fetch(request);
+	},
+};
