@@ -1,0 +1,21 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "x": 0, "y": 0, "w": 420, "h": 260, "title": "secbyte.dev — final mark", "page": "final" },
+    { "file": "SizesCheck.dc.html", "x": 0, "y": 340, "w": 900, "h": 360, "title": "At scale", "page": "final" },
+    { "file": "ConceptB.dc.html", "x": 500, "y": 0, "w": 420, "h": 260, "title": "Concept B — Tag wrap", "page": "alternates" },
+    { "file": "ConceptC.dc.html", "x": 1000, "y": 0, "w": 420, "h": 260, "title": "Concept C — Network node", "page": "alternates" },
+    { "file": "ConceptD.dc.html", "x": 1500, "y": 0, "w": 420, "h": 260, "title": "Concept D — Blinking cursor", "page": "alternates" }
+  ],
+  "annotations": [
+    { "id": "note-final", "x": 0, "y": 270, "w": 420, "text": "Chosen direction: static chevron, wordmark, blinking cursor at the very end (not right after the chevron). Color chip above lets you try amber/cyan/grayscale-only accent.", "page": "final" },
+    { "id": "note-sizes", "x": 0, "y": 710, "w": 620, "text": "Legibility check across sizes — \">_\" alone reads fine down to favicon scale.", "page": "final" },
+    { "id": "note-b", "x": 500, "y": 270, "w": 420, "text": "The whole name styled as a self-closing tag. Not chosen — kept here for reference.", "page": "alternates" },
+    { "id": "note-c", "x": 1000, "y": 270, "w": 420, "text": "A tiny network graph as the icon, ties directly to \"networking\". Not chosen — kept here for reference.", "page": "alternates" },
+    { "id": "note-d", "x": 1500, "y": 270, "w": 420, "text": "Wordmark with a trailing cursor, no chevron. Not chosen — kept here for reference.", "page": "alternates" }
+  ],
+  "pages": [
+    { "id": "final", "name": "Final" },
+    { "id": "alternates", "name": "Other directions" }
+  ],
+  "launch": { "view": "canvas", "page": "final" }
+}

@@ -1,6 +1,7 @@
 ---
 import { footerLinks } from '../data/footerLinks.js';
 import { socialLinks } from '../data/socialLinks.js';
+import Logo from './Logo.astro';
 
 const columns = [
 	{ heading: 'Navigate', links: footerLinks },
@@ -10,7 +11,7 @@ const columns = [
 
 <footer class="footer">
 	<div class="wrapper footer-inner">
-		<div class="brand">secbyte.dev</div>
+		<Logo size="sm" />
 
 		<div class="columns">
 			{columns.map((column) => (
@@ -36,11 +37,6 @@ const columns = [
 		flex-wrap: wrap;
 		justify-content: space-between;
 		gap: 2rem;
-	}
-
-	.brand {
-		font-weight: 600;
-		font-size: 0.9rem;
 	}
 
 	.columns {

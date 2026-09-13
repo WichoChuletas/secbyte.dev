@@ -1,5 +1,7 @@
 # build output
 dist/
+# seeded design-canvas payload (design source lives in logo-design/*.dc.html)
+logo-design/*.html
 # generated types
 .astro/
 
